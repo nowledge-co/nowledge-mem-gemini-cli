@@ -1,0 +1,27 @@
+name: Validate Gemini Extension
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+      - dev
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Validate extension package
+        run: npm run validate
+
+      - name: Verify release packaging
+        run: npm run package:release

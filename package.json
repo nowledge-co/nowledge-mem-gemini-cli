@@ -1,0 +1,28 @@
+{
+  "name": "nowledge-mem-gemini-cli",
+  "version": "0.1.3",
+  "private": true,
+  "description": "Gemini CLI extension for Nowledge Mem",
+  "license": "MIT",
+  "homepage": "https://mem.nowledge.co/docs/integrations/gemini-cli",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "validate": "node scripts/validate-extension.mjs",
+    "package:release": "node scripts/package-extension.mjs",
+    "verify:release": "npm run validate && npm run package:release"
+  },
+  "keywords": [
+    "gemini-cli",
+    "nowledge-mem",
+    "memory",
+    "knowledge-base",
+    "agent-skills",
+    "cli"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nowledge-co/nowledge-mem-gemini-cli.git"
+  }
+}
