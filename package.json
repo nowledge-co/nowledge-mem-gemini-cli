@@ -1,6 +1,6 @@
 {
   "name": "nowledge-mem-gemini-cli",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "private": true,
   "description": "Gemini CLI extension for Nowledge Mem",
   "license": "MIT",

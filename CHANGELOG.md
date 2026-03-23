@@ -5,6 +5,13 @@ All notable changes to the Nowledge Mem Gemini CLI extension will be documented 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.4] - 2026-03-23
+
+### Changed
+
+- Search-memory skill: renamed "Strong Triggers" → "Strong Signals" and added "Contextual signals" section (debugging, architecture, conventions) — aligned with shared behavioral guidance across all Nowledge Mem integrations
+- Distill-memory skill: strengthened proactive save guidance ("Save proactively... Do not wait to be asked")
+
 ## [0.1.3] - 2026-03-10
 
 ### Changed
