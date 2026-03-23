@@ -5,7 +5,7 @@ description: Detect breakthrough moments, durable lessons, and decisions worth p
 
 # Distill Memory
 
-Store only knowledge that should remain useful after the current session ends.
+Save proactively when the conversation produces a decision, preference, plan, procedure, learning, or important context. Do not wait to be asked.
 
 ## Good Candidates
 

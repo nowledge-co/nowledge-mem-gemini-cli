@@ -7,7 +7,7 @@ description: Search the user's personal knowledge base when past insights would 
 
 Use Nowledge Mem proactively when prior knowledge would materially improve the answer.
 
-## Strong Triggers
+## Strong Signals
 
 Search when:
 
@@ -15,6 +15,13 @@ Search when:
 - the task resumes a named feature, bug, refactor, incident, or subsystem
 - a debugging pattern resembles something solved earlier
 - the user asks for rationale, preferences, procedures, or recurring workflow details
+- the user uses implicit recall language: "that approach", "like before"
+
+**Contextual signals — consider searching when:**
+
+- complex debugging where prior context would narrow the search space
+- architecture discussion that may intersect with past decisions
+- domain-specific conventions the user has established before
 - the current result is ambiguous and past context would make the answer sharper
 
 ## Retrieval Routing
