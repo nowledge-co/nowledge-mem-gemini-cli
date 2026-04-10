@@ -7,6 +7,8 @@ description: Read the user's daily Working Memory briefing at session start or w
 
 Use `nmem --json wm read` for the user's current priorities, unresolved flags, and recent context.
 
+If the runtime already knows the current project or agent lane, add `--space <space_id>`.
+
 ## When to Use
 
 - At session start

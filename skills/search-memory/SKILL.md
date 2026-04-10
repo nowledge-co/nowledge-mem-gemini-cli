@@ -32,4 +32,6 @@ Search when:
 4. If a memory result includes a `source_thread` or thread search returns a strong hit, inspect the conversation progressively with `nmem --json t show`.
 5. Prefer the smallest retrieval surface that answers the question.
 
+If the runtime already knows the active project or agent lane, add `--space <space_id>` to these commands.
+
 Mention source threads when they add useful historical context.

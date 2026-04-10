@@ -123,6 +123,7 @@ Examples:
 ```bash
 nmem --json wm read
 nmem --json m search "auth token rotation" --mode deep --importance 0.7
+nmem --json m search "auth token rotation" --mode deep --importance 0.7 --space research-agent
 nmem --json m add "JWT refresh failures came from clock skew between the gateway and API nodes." -t "JWT refresh failures traced to clock skew" -i 0.9 --unit-type learning -l auth -l backend -s gemini-cli
 nmem --json t save --from gemini-cli -p . -s "Finished the auth refactor and verified the new refresh-token flow."
 nmem --json t create -t "Gemini CLI Session - auth refactor" -c "Goal: finish the auth refactor. Decisions: keep refresh verification in the API layer and treat gateway skew as the root cause. Files: api/auth.ts, auth.test.ts. Next: validate expiry behavior against remote sessions." -s gemini-cli
