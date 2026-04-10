@@ -49,7 +49,7 @@ nmem --json wm read
 
 If the command succeeds but returns `exists: false`, there is no Working Memory briefing yet. Say that clearly instead of pretending a briefing exists.
 
-If the runtime already knows the current project or agent lane, add `--space <space_id>`.
+If the runtime already knows the current project or agent lane, add `--space "<space name>"`.
 
 Only fall back to the legacy file below for older local-only **Default-space** setups where the user still keeps Working Memory there:
 
@@ -75,7 +75,7 @@ Start with durable recall:
 nmem --json m search "query"
 ```
 
-If the runtime already knows the active project or agent lane, add `--space <space_id>` to Working Memory, memory search, thread search, and save commands.
+If the runtime already knows the active project or agent lane, add `--space "<space name>"` to Working Memory, memory search, thread search, and save commands.
 
 If the recall need is conceptual or the first pass is weak, use deep search:
 
