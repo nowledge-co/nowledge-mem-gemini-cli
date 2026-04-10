@@ -9,7 +9,7 @@ nmem --json wm read
 
 If the command succeeds but reports that no Working Memory exists yet, say that clearly.
 
-If the runtime already knows the current project or agent lane, add `--space <space_id>`.
+If the runtime already knows the current project or agent lane, add `--space "<space name>"`.
 
 Only if `nmem` is unavailable in an older local-only **Default-space** setup, fall back to:
 
