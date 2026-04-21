@@ -149,6 +149,17 @@ This integration keeps the control plane simple:
 
 The result is a setup that is easier to reason about, easier to support, and easier for advanced users to extend.
 
+## Customize without editing the extension
+
+Gemini CLI already gives you a durable instruction layer through `GEMINI.md`.
+
+- Shared repo behavior: project `GEMINI.md`
+- Personal behavior across repos: `~/.gemini/GEMINI.md`
+- Large customizations: split them into files and import with `@file.md`
+- Do not edit the installed Nowledge Mem extension files directly
+
+That keeps your custom behavior stable while letting the extension keep updating normally.
+
 ## Links
 
 - [Documentation](https://mem.nowledge.co/docs/integrations/gemini-cli)
