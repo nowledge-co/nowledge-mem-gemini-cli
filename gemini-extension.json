@@ -1,6 +1,6 @@
 {
   "name": "nowledge-mem-gemini-cli",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "description": "Gemini CLI extension for Nowledge Mem with persistent context, memory commands, and agent skills.",
   "mcpServers": {
     "nowledge-mem": {

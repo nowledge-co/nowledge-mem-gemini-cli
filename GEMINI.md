@@ -26,18 +26,18 @@ Prefer the smallest surface that answers the user's need, then move upward only 
 
 Preferred persistent remote setup:
 
-```json
-{
-  "apiUrl": "https://mem.example.com",
-  "apiKey": "nmem_your_key"
-}
+```bash
+nmem config client set url https://mem.example.com
+nmem config client set api-key nmem_your_key
 ```
 
-Save it to:
+If Gemini's MCP tools also need to target remote Mem, generate the host config with:
 
-```text
-~/.nowledge-mem/config.json
+```bash
+nmem config mcp show --host gemini-cli
 ```
+
+Paste the generated JSON into Gemini `settings.json`. Direct MCP clients do not read `~/.nowledge-mem/config.json` automatically.
 
 ## Working Memory
 

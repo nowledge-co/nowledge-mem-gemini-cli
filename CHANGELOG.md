@@ -5,6 +5,12 @@ All notable changes to the Nowledge Mem Gemini CLI extension will be documented 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.8] - 2026-04-27
+
+### Improved
+
+- Clarified remote MCP setup: durable remote credentials still live in the shared `nmem` client config, while Gemini's MCP transport needs a host-owned `mcpServers.nowledge-mem` override generated with `nmem config mcp show --host gemini-cli`.
+
 ## [0.1.7] - 2026-04-27
 
 ### Added

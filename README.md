@@ -97,17 +97,9 @@ By default, both `nmem` and the bundled MCP server point to the local Mem server
 
 For remote Mem, the preferred long-term setup is:
 
-```json
-{
-  "apiUrl": "https://mem.example.com",
-  "apiKey": "nmem_your_key"
-}
-```
-
-Save that to:
-
-```text
-~/.nowledge-mem/config.json
+```bash
+nmem config client set url https://mem.example.com
+nmem config client set api-key nmem_your_key
 ```
 
 `nmem` loads connection settings with this priority:
@@ -121,19 +113,11 @@ If you need a temporary override for one Gemini session, launch Gemini from a sh
 
 For Gemini MCP tools in remote mode, define a `nowledge-mem` server in Gemini `settings.json`. Gemini gives user settings precedence over the extension's bundled local MCP server:
 
-```json
-{
-  "mcpServers": {
-    "nowledge-mem": {
-      "httpUrl": "https://mem.example.com/mcp/",
-      "headers": {
-        "APP": "Gemini CLI",
-        "Authorization": "Bearer nmem_your_key"
-      }
-    }
-  }
-}
+```bash
+nmem config mcp show --host gemini-cli
 ```
+
+Paste the generated JSON into Gemini's `settings.json`. Direct MCP clients do not read `~/.nowledge-mem/config.json` automatically; the generated block gives Gemini the same URL and key that `nmem` already uses.
 
 For thread save in remote mode, the important detail is that `nmem t save --from gemini-cli` reads Gemini's local session files on the machine running Gemini, then uploads the normalized thread messages to Mem. The remote Mem server does not need direct access to your `~/.gemini` directory.
 
