@@ -61,6 +61,7 @@ Release packaging and marketplace notes live in [`RELEASING.md`](./RELEASING.md)
 **Automatic lifecycle hooks**
 
 - Session start loads Working Memory into Gemini when a briefing exists
+- Before context compression, Gemini imports the current thread so the pre-compression transcript remains searchable
 - Session end performs a best-effort real Gemini thread import through `nmem t save --from gemini-cli`
 
 **Persistent context**
@@ -134,7 +135,7 @@ nmem status
 
 Gemini now supports two separate save paths, and they should stay distinct:
 
-- `/nowledge:save-thread` imports the **real Gemini session messages** into Nowledge Mem with `nmem t save --from gemini-cli`. The summary is only metadata; the stored thread is based on Gemini's recorded transcript. The extension also performs this import automatically at session end as a best-effort, idempotent lifecycle hook.
+- `/nowledge:save-thread` imports the **real Gemini session messages** into Nowledge Mem with `nmem t save --from gemini-cli`. The summary is only metadata; the stored thread is based on Gemini's recorded transcript. The extension also performs this import automatically before context compression and at session end as best-effort, idempotent lifecycle hooks.
 - `/nowledge:save-handoff` creates a **compact resumable handoff summary** with Goal, Decisions, Files, Risks, and Next. Use this when the user wants a lightweight restart point rather than the full transcript.
 
 Use `/nowledge:distill-memory` for durable atomic knowledge, `/nowledge:save-thread` for the full session, and `/nowledge:save-handoff` for a resumable handoff.

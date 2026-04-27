@@ -25,6 +25,19 @@
           }
         ]
       }
+    ],
+    "PreCompress": [
+      {
+        "hooks": [
+          {
+            "name": "save-thread-before-compression",
+            "type": "command",
+            "command": "node \"${extensionPath}${/}hooks${/}session-end.mjs\"",
+            "description": "Best-effort Gemini session import before context compression.",
+            "timeout": 20000
+          }
+        ]
+      }
     ]
   }
 }

@@ -115,7 +115,7 @@ nmem m update <id> -t "Updated title"
 
 ## Save Thread
 
-Only save a thread when the user explicitly asks to persist the real Gemini session. The extension also performs a best-effort automatic thread import on session end, so this command is mainly for explicit mid-session capture or immediate confirmation.
+Only save a thread when the user explicitly asks to persist the real Gemini session. The extension also performs a best-effort automatic thread import before context compression and at session end, so this command is mainly for explicit mid-session capture or immediate confirmation.
 
 This is a real session import, not a summary fallback. Use:
 

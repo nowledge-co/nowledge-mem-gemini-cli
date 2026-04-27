@@ -5,6 +5,12 @@ All notable changes to the Nowledge Mem Gemini CLI extension will be documented 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.6] - 2026-04-27
+
+### Added
+
+- Added a `PreCompress` lifecycle hook so Gemini imports the current thread before context compression, not only when the session exits.
+
 ## [0.1.5] - 2026-04-14
 
 ### Changed
