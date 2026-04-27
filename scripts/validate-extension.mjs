@@ -44,6 +44,17 @@ async function main() {
     fail('manifest.contextFileName must be GEMINI.md');
   }
 
+  const server = manifest.mcpServers?.['nowledge-mem'];
+  if (!server || typeof server !== 'object') {
+    fail('manifest.mcpServers.nowledge-mem must be defined');
+  }
+  if (server.httpUrl !== 'http://127.0.0.1:14242/mcp/') {
+    fail('manifest.mcpServers.nowledge-mem.httpUrl must stay on the local Mem MCP endpoint');
+  }
+  if (server.headers?.APP !== 'Gemini CLI') {
+    fail('manifest.mcpServers.nowledge-mem.headers.APP must be Gemini CLI');
+  }
+
   if (manifest.settings !== undefined && !Array.isArray(manifest.settings)) {
     fail('manifest.settings must be an array when present');
   }

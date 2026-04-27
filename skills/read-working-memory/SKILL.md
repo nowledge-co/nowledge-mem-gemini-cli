@@ -5,7 +5,7 @@ description: Read the user's daily Working Memory briefing at session start or w
 
 # Read Working Memory
 
-Use `nmem --json wm read` for the user's current priorities, unresolved flags, and recent context.
+Use MCP `read_working_memory` when it is available. Otherwise use `nmem --json wm read` for the user's current priorities, unresolved flags, and recent context.
 
 If the runtime already knows the current project or agent lane, add `--space "<space name>"`.
 

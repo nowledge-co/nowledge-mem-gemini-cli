@@ -4,14 +4,15 @@
 
 This package is the **Gemini-native product surface** for Nowledge Mem.
 
-It is deliberately **CLI-first**:
+It is deliberately **hybrid**:
 
 - Gemini CLI loads `GEMINI.md` plus extension hooks for Working Memory bootstrap and session capture
+- the extension exposes local Nowledge Mem MCP tools for lower-friction retrieval and memory writes
 - bundled commands wrap common `nmem` workflows
 - bundled skills teach Gemini when to recall, distill, save real threads, and create handoff summaries
 - Gemini can still call `nmem` directly whenever it needs a more flexible path
 
-The recommended Gemini setup is deliberately simple and stable: Gemini CLI on top, `nmem` underneath. That keeps auth, debugging, and command composition in one place.
+The recommended Gemini setup is deliberately simple and stable: Gemini CLI on top, MCP for direct retrieval tools, and `nmem` for hooks, thread save, remote auth, and command fallback.
 
 ## Requirements
 
@@ -64,6 +65,11 @@ Release packaging and marketplace notes live in [`RELEASING.md`](./RELEASING.md)
 - Before context compression, Gemini imports the current thread so the pre-compression transcript remains searchable
 - Session end performs a best-effort real Gemini thread import through `nmem t save --from gemini-cli`
 
+**Bundled MCP**
+
+- Local same-machine installs expose `nowledge-mem` MCP tools at `http://127.0.0.1:14242/mcp/`
+- Gemini `settings.json` can override the same `nowledge-mem` server name for remote Mem or a custom local endpoint
+
 **Persistent context**
 
 - `GEMINI.md` tells Gemini how to route recall across Working Memory, distilled memories, conversation threads, thread save, distillation, and handoff summaries
@@ -87,7 +93,7 @@ Release packaging and marketplace notes live in [`RELEASING.md`](./RELEASING.md)
 
 ## Local vs Remote
 
-By default, `nmem` connects to the local Mem server at `http://127.0.0.1:14242`.
+By default, both `nmem` and the bundled MCP server point to the local Mem server at `http://127.0.0.1:14242`.
 
 For remote Mem, the preferred long-term setup is:
 
@@ -112,6 +118,22 @@ Save that to:
 - defaults
 
 If you need a temporary override for one Gemini session, launch Gemini from a shell where `NMEM_API_URL` and `NMEM_API_KEY` are already exported. For durable setup, keep using `~/.nowledge-mem/config.json`.
+
+For Gemini MCP tools in remote mode, define a `nowledge-mem` server in Gemini `settings.json`. Gemini gives user settings precedence over the extension's bundled local MCP server:
+
+```json
+{
+  "mcpServers": {
+    "nowledge-mem": {
+      "httpUrl": "https://mem.example.com/mcp/",
+      "headers": {
+        "APP": "Gemini CLI",
+        "Authorization": "Bearer nmem_your_key"
+      }
+    }
+  }
+}
+```
 
 For thread save in remote mode, the important detail is that `nmem t save --from gemini-cli` reads Gemini's local session files on the machine running Gemini, then uploads the normalized thread messages to Mem. The remote Mem server does not need direct access to your `~/.gemini` directory.
 
@@ -145,7 +167,8 @@ Use `/nowledge:distill-memory` for durable atomic knowledge, `/nowledge:save-thr
 This integration keeps the control plane simple:
 
 - Gemini provides the extension surface: `GEMINI.md`, commands, and skills
-- `nmem` provides the execution path: memory search, Working Memory, capture, thread import, and remote auth
+- MCP provides the direct tool path for retrieval and memory writes when Gemini chooses tools
+- `nmem` provides the lifecycle path: Working Memory hooks, capture, thread import, remote auth, and command fallback
 - direct `nmem` composition stays available whenever Gemini needs a more flexible command path
 
 The result is a setup that is easier to reason about, easier to support, and easier for advanced users to extend.

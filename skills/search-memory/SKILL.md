@@ -26,11 +26,20 @@ Search when:
 
 ## Retrieval Routing
 
+If MCP tools are available, prefer:
+
+1. `memory_search` for durable knowledge.
+2. `thread_search` for prior discussions, previous sessions, or exact conversation history.
+3. `thread_fetch_messages` for progressive inspection of a matching thread.
+
+Otherwise:
+
 1. Start with `nmem --json m search` for durable knowledge.
 2. Use `--mode deep` when the first pass is weak or the recall need is conceptual.
 3. Use `nmem --json t search` for prior discussions, previous sessions, or exact conversation history.
 4. If a memory result includes a `source_thread` or thread search returns a strong hit, inspect the conversation progressively with `nmem --json t show`.
-5. Prefer the smallest retrieval surface that answers the question.
+
+Prefer the smallest retrieval surface that answers the question.
 
 If the runtime already knows the active project or agent lane, add `--space "<space name>"` to these commands.
 

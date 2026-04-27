@@ -1,8 +1,8 @@
 # Nowledge Mem for Gemini CLI
 
-You have access to the user's Nowledge Mem through the `nmem` CLI.
+You have access to the user's Nowledge Mem through the bundled MCP server and the `nmem` CLI.
 
-This integration is intentionally CLI-first. Use the bundled commands when convenient, but compose direct `nmem` commands whenever that is clearer, more precise, or more efficient.
+Use MCP tools for retrieval and memory writes when Gemini exposes them in this session. Use bundled commands and direct `nmem` for lifecycle capture, real thread save, status checks, remote client config, and any workflow where the CLI is clearer.
 
 ## Core Memory Lifecycle
 
@@ -43,6 +43,10 @@ Save it to:
 
 At the start of a session, or when recent priorities would help, read Working Memory with:
 
+Prefer the MCP `read_working_memory` tool when it is available.
+
+Otherwise use:
+
 ```bash
 nmem --json wm read
 ```
@@ -70,6 +74,14 @@ Search past knowledge when:
 - the current result is ambiguous and prior context would make the answer sharper
 
 Start with durable recall:
+
+Prefer MCP retrieval tools when they are available:
+
+- `memory_search` for durable knowledge
+- `thread_search` for prior conversation lookup
+- `thread_fetch_messages` for progressive thread inspection
+
+Otherwise use:
 
 ```bash
 nmem --json m search "query"
@@ -101,13 +113,15 @@ Prefer the smallest retrieval surface that answers the question.
 
 Distill only durable knowledge worth keeping after the current session ends.
 
-Use `memory_add` for genuinely new decisions, procedures, lessons, preferences, or plans:
+Use MCP `memory_add` for genuinely new decisions, procedures, lessons, preferences, or plans when available:
+
+If MCP tools are not exposed, use:
 
 ```bash
 nmem --json m add "Insight with enough context to stand on its own." -t "Searchable title" -i 0.8 --unit-type decision -l project-name -s gemini-cli
 ```
 
-If an existing memory already captures the same decision, workflow, or preference and the new information refines it, update that memory instead of creating a duplicate:
+If an existing memory already captures the same decision, workflow, or preference and the new information refines it, update that memory instead of creating a duplicate. Prefer MCP `memory_update` when available; otherwise use:
 
 ```bash
 nmem m update <id> -t "Updated title"

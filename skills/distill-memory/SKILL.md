@@ -17,7 +17,7 @@ Save proactively when the conversation produces a decision, preference, plan, pr
 
 ## Add vs Update
 
-- Use `nmem --json m add` when the insight is genuinely new.
-- If an existing memory already captures the same decision, workflow, or preference and the new information refines it, use `nmem m update <id> ...` instead of creating a duplicate.
+- Use MCP `memory_add` when the insight is genuinely new and MCP tools are available. Otherwise use `nmem --json m add`.
+- If an existing memory already captures the same decision, workflow, or preference and the new information refines it, use MCP `memory_update` when available. Otherwise use `nmem m update <id> ...` instead of creating a duplicate.
 
 Prefer atomic, standalone memories with strong titles and structured meaning. Focus on what was learned or decided, not routine chatter.
