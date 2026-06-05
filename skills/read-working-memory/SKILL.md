@@ -5,9 +5,21 @@ description: Read the user's daily Working Memory briefing at session start or w
 
 # Read Working Memory
 
-Use MCP `read_working_memory` when it is available. Otherwise use `nmem --json wm read` for the user's current priorities, unresolved flags, and recent context.
+Use MCP `read_context_bundle` when startup identity, agent lane, space scope, or guidance could matter. It includes Working Memory plus the full owner/agent/scope contract.
 
-If the runtime already knows the current project or agent lane, add `--space "<space name>"`.
+If Context Bundle is unavailable or you only need current priorities, use MCP `read_working_memory` or:
+
+```bash
+nmem --json wm read
+```
+
+CLI Context Bundle fallback:
+
+```bash
+nmem --json context --source-app gemini-cli
+```
+
+If the runtime already knows the current project or agent lane, add `--space "<space name>"`. If it knows a stable long-running agent id, add `--host-agent-id "<agent-id>"` to `nmem context`.
 
 ## When to Use
 
@@ -18,6 +30,7 @@ If the runtime already knows the current project or agent lane, add `--space "<s
 
 ## Usage Pattern
 
-- Read once near the start of a session.
+- Read Context Bundle or Working Memory once near the start of a session.
+- If Context Bundle was already loaded and includes Working Memory, do not read Working Memory again.
 - Reuse that context mentally instead of re-reading on every turn.
 - Refresh only if the user asks, the session context changed materially, or a long-running session clearly needs it.
