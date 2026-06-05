@@ -5,7 +5,7 @@ description: Detect breakthrough moments, durable lessons, and decisions worth p
 
 # Distill Memory
 
-Save proactively when the conversation produces a decision, preference, plan, procedure, learning, or important context. Do not wait to be asked.
+Save proactively when the conversation produces a durable fact, preference, decision, plan, procedure, learning, event, or important context. Do not wait to be asked.
 
 ## Good Candidates
 
@@ -21,3 +21,5 @@ Save proactively when the conversation produces a decision, preference, plan, pr
 - If an existing memory already captures the same decision, workflow, or preference and the new information refines it, use MCP `memory_update` when available. Otherwise use `nmem m update <id> ...` instead of creating a duplicate.
 
 Prefer atomic, standalone memories with strong titles and structured meaning. Focus on what was learned or decided, not routine chatter.
+
+When saving directly, pass `unit_type` when you know it: `fact`, `preference`, `decision`, `plan`, `procedure`, `learning`, `context`, or `event`.

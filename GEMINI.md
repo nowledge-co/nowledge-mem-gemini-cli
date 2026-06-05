@@ -113,7 +113,7 @@ Prefer the smallest retrieval surface that answers the question.
 
 Distill only durable knowledge worth keeping after the current session ends.
 
-Use MCP `memory_add` for genuinely new decisions, procedures, lessons, preferences, or plans when available:
+Use MCP `memory_add` for genuinely new facts, preferences, decisions, plans, procedures, learnings, events, or context when available. Pass `unit_type` when the type is clear:
 
 If MCP tools are not exposed, use:
 
