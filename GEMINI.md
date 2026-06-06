@@ -64,7 +64,7 @@ nmem --json wm read
 
 If the command succeeds but returns `exists: false`, there is no Working Memory briefing yet. Say that clearly instead of pretending a briefing exists.
 
-If the runtime already knows the current project or agent lane, add `--space "<space name>"` to either command. If Gemini exposes a stable long-running agent id, add `--host-agent-id "<agent-id>"` to `nmem context`. Multi-agent orchestrators can set `NMEM_AGENT_ID`, `NMEM_HOST_AGENT_ID`, and `NMEM_SPACE` before launching Gemini CLI.
+If the runtime already knows the current project or agent lane, add `--space "<space name>"` to either command. Multi-agent orchestrators can set `NMEM_AGENT_ID="<agent-slug>"` before launching Gemini CLI. Add `NMEM_SPACE` only when that whole run should override the identity's default space. Use `NMEM_HOST_AGENT_ID` only for advanced host-id aliases.
 
 Only fall back to the legacy file below for older local-only **Default-space** setups where the user still keeps Working Memory there:
 

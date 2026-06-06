@@ -19,7 +19,7 @@ CLI Context Bundle fallback:
 nmem --json context --source-app gemini-cli
 ```
 
-If the runtime already knows the current project or agent lane, add `--space "<space name>"`. If it knows a stable long-running agent id, add `--host-agent-id "<agent-id>"` to `nmem context`. Multi-agent orchestrators can set `NMEM_AGENT_ID`, `NMEM_HOST_AGENT_ID`, and `NMEM_SPACE` before launching Gemini CLI.
+If the runtime already knows the current project or agent lane, add `--space "<space name>"`. Multi-agent orchestrators can set `NMEM_AGENT_ID="<agent-slug>"` before launching Gemini CLI. Add `NMEM_SPACE` only when that whole run should override the identity's default space. Use `NMEM_HOST_AGENT_ID` only for advanced host-id aliases.
 
 ## When to Use
 
