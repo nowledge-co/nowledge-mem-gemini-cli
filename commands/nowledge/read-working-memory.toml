@@ -1,15 +1,21 @@
 prompt = """
-Load the user's Working Memory briefing before continuing.
+Load the user's startup context before continuing.
 
-Use the shell tool to try:
+When identity, active space, guidance, or multi-agent behavior could matter, use Context Bundle first:
+
+```bash
+nmem --json context --source-app gemini-cli
+```
+
+For a lightweight daily briefing or older `nmem` clients, use:
 
 ```bash
 nmem --json wm read
 ```
 
-If the command succeeds but reports that no Working Memory exists yet, say that clearly.
+If either command succeeds but returns no content yet, say that clearly.
 
-If the runtime already knows the current project or agent lane, add `--space "<space name>"`.
+If the runtime already knows the current project or agent lane, add `--space "<space name>"` to either command. If Gemini exposes a stable long-running agent id, add `--host-agent-id "<agent-id>"` to `nmem context`. Multi-agent orchestrators can set `NMEM_AGENT_ID`, `NMEM_HOST_AGENT_ID`, and `NMEM_SPACE` before launching Gemini CLI.
 
 Only if `nmem` is unavailable in an older local-only **Default-space** setup, fall back to:
 
@@ -17,7 +23,7 @@ Only if `nmem` is unavailable in an older local-only **Default-space** setup, fa
 cat ~/ai-now/memory.md
 ```
 
-Then summarize the user's active focus areas, priorities, unresolved flags, and the most relevant recent changes when a briefing is actually present.
+Then summarize only the parts relevant to the task. If Context Bundle was loaded, do not separately read Working Memory unless the user asks for a lightweight refresh.
 
 If remote access is configured through `~/.nowledge-mem/config.json`, let `nmem` use it naturally. Do not assume environment variables are the only auth path.
 """

@@ -6,12 +6,13 @@ Use MCP tools for retrieval and memory writes when Gemini exposes them in this s
 
 ## Core Memory Lifecycle
 
-Treat Nowledge Mem as four linked surfaces:
+Treat Nowledge Mem as five linked surfaces:
 
-1. Working Memory for current focus and active priorities
-2. Distilled memories for durable knowledge
-3. Threads for full searchable conversation history
-4. Handoff summaries for compact resumability when the user wants a manual handoff
+1. Context Bundle for startup identity, active space, guidance, and current priorities
+2. Working Memory for a lightweight current-focus briefing
+3. Distilled memories for durable knowledge
+4. Threads for full searchable conversation history
+5. Handoff summaries for compact resumability when the user wants a manual handoff
 
 Prefer the smallest surface that answers the user's need, then move upward only when more context is necessary.
 
@@ -39,9 +40,19 @@ nmem config mcp show --host gemini-cli
 
 Paste the generated JSON into Gemini `settings.json`. Direct MCP clients do not read `~/.nowledge-mem/config.json` automatically.
 
-## Working Memory
+## Context Bundle And Working Memory
 
-At the start of a session, or when recent priorities would help, read Working Memory with:
+At the start of a session, or when recent priorities would help, read Context Bundle when identity, active space, guidance, or multi-agent behavior could matter:
+
+Prefer the MCP `read_context_bundle` tool when it is available.
+
+Otherwise use:
+
+```bash
+nmem --json context --source-app gemini-cli
+```
+
+Use Working Memory alone for the lighter daily briefing or compatibility fallback.
 
 Prefer the MCP `read_working_memory` tool when it is available.
 
@@ -53,7 +64,7 @@ nmem --json wm read
 
 If the command succeeds but returns `exists: false`, there is no Working Memory briefing yet. Say that clearly instead of pretending a briefing exists.
 
-If the runtime already knows the current project or agent lane, add `--space "<space name>"`.
+If the runtime already knows the current project or agent lane, add `--space "<space name>"` to either command. If Gemini exposes a stable long-running agent id, add `--host-agent-id "<agent-id>"` to `nmem context`. Multi-agent orchestrators can set `NMEM_AGENT_ID`, `NMEM_HOST_AGENT_ID`, and `NMEM_SPACE` before launching Gemini CLI.
 
 Only fall back to the legacy file below for older local-only **Default-space** setups where the user still keeps Working Memory there:
 
@@ -61,7 +72,7 @@ Only fall back to the legacy file below for older local-only **Default-space** s
 test -f ~/ai-now/memory.md && cat ~/ai-now/memory.md
 ```
 
-Read Working Memory once near the start of a session, then reuse that context mentally. Do not re-read on every turn unless the user asks, the session context changed materially, or a long-running session clearly needs a refresh.
+Read Context Bundle or Working Memory once near the start of a session, then reuse that context mentally. If Context Bundle already included Working Memory, do not read Working Memory again immediately. Do not re-read on every turn unless the user asks, the session context changed materially, or a long-running session clearly needs a refresh.
 
 ## Search Memory
 
@@ -87,7 +98,7 @@ Otherwise use:
 nmem --json m search "query"
 ```
 
-If the runtime already knows the active project or agent lane, add `--space "<space name>"` to Working Memory, memory search, thread search, and save commands.
+If the runtime already knows the active project or agent lane, add `--space "<space name>"` to Context Bundle, Working Memory, memory search, thread search, and save commands.
 
 If the recall need is conceptual or the first pass is weak, use deep search:
 

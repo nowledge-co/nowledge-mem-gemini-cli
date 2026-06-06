@@ -6,7 +6,7 @@ This package is the **Gemini-native product surface** for Nowledge Mem.
 
 It is deliberately **hybrid**:
 
-- Gemini CLI loads `GEMINI.md` plus extension hooks for Working Memory bootstrap and session capture
+- Gemini CLI loads `GEMINI.md` plus extension hooks for Context Bundle / Working Memory startup context and session capture
 - the extension exposes local Nowledge Mem MCP tools for lower-friction retrieval and memory writes
 - bundled commands wrap common `nmem` workflows
 - bundled skills teach Gemini when to recall, distill, save real threads, and create handoff summaries
@@ -65,7 +65,7 @@ Release packaging and marketplace notes live in [`RELEASING.md`](./RELEASING.md)
 
 **Automatic lifecycle hooks**
 
-- Session start loads Working Memory into Gemini when a briefing exists
+- Session start loads Context Bundle when available, with Working Memory as the lightweight fallback
 - Before context compression, Gemini imports the current thread so the pre-compression transcript remains searchable
 - Session end performs a best-effort real Gemini thread import through `nmem t save --from gemini-cli`
 
@@ -76,7 +76,7 @@ Release packaging and marketplace notes live in [`RELEASING.md`](./RELEASING.md)
 
 **Persistent context**
 
-- `GEMINI.md` tells Gemini how to route recall across Working Memory, distilled memories, conversation threads, thread save, distillation, and handoff summaries
+- `GEMINI.md` tells Gemini how to route recall across Context Bundle, Working Memory, distilled memories, conversation threads, thread save, distillation, and handoff summaries
 
 **Custom commands**
 
