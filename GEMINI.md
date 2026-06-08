@@ -8,7 +8,7 @@ Use MCP tools for retrieval and memory writes when Gemini exposes them in this s
 
 Treat Nowledge Mem as five linked surfaces:
 
-1. Context Bundle for startup identity, active space, guidance, and current priorities
+1. Context Bundle for startup identity, active space, active rules, and current priorities
 2. Working Memory for a lightweight current-focus briefing
 3. Distilled memories for durable knowledge
 4. Threads for full searchable conversation history
@@ -42,7 +42,7 @@ Paste the generated JSON into Gemini `settings.json`. Direct MCP clients do not 
 
 ## Context Bundle And Working Memory
 
-At the start of a session, or when recent priorities would help, read Context Bundle when identity, active space, guidance, or multi-agent behavior could matter:
+At the start of a session, or when recent priorities would help, read Context Bundle when identity, active space, active rules, or multi-agent behavior could matter:
 
 Prefer the MCP `read_context_bundle` tool when it is available.
 
