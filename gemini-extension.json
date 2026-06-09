@@ -1,7 +1,7 @@
 {
   "name": "nowledge-mem-gemini-cli",
-  "version": "0.1.8",
-  "description": "Gemini CLI extension for Nowledge Mem with persistent context, memory commands, and agent skills.",
+  "version": "0.1.9",
+  "description": "Gemini CLI extension for Nowledge Mem with startup context, memory commands, and agent skills.",
   "mcpServers": {
     "nowledge-mem": {
       "httpUrl": "http://127.0.0.1:14242/mcp/",
@@ -9,7 +9,7 @@
         "APP": "Gemini CLI"
       },
       "timeout": 10000,
-      "description": "Nowledge Mem local MCP tools for Working Memory, memory search, thread search, and memory writes."
+      "description": "Nowledge Mem local MCP tools for Context Bundle, Working Memory, memory search, thread search, and memory writes."
     }
   },
   "contextFileName": "GEMINI.md"

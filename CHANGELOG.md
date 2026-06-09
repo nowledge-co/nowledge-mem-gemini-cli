@@ -5,6 +5,12 @@ All notable changes to the Nowledge Mem Gemini CLI extension will be documented 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.9] - 2026-06-06
+
+### Improved
+
+- Session-start hooks, commands, and Gemini guidance now prefer Context Bundle when startup identity, active scope, or guidance matters, with Working Memory kept as the lightweight fallback for older `nmem` clients.
+
 ## [0.1.8] - 2026-04-27
 
 ### Improved
