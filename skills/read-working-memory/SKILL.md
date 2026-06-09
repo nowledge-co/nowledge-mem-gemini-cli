@@ -5,7 +5,7 @@ description: Read the user's daily Working Memory briefing at session start or w
 
 # Read Working Memory
 
-Use MCP `read_context_bundle` when startup identity, agent lane, space scope, or guidance could matter. It includes Working Memory plus the full owner/agent/scope contract.
+Use MCP `read_context_bundle` when startup identity, agent lane, space scope, or Rules could matter. It includes Working Memory plus the full owner/AI Identity/scope/rules contract.
 
 If Context Bundle is unavailable or you only need current priorities, use MCP `read_working_memory` or:
 
