@@ -141,6 +141,20 @@ nmem --json t create -t "Gemini CLI Session - auth refactor" -c "Goal: finish th
 nmem status
 ```
 
+For historical backfill, preview first:
+
+```bash
+nmem t sync --from gemini-cli --all-projects --limit 20
+```
+
+Then import:
+
+```bash
+nmem t sync --from gemini-cli --all-projects --apply
+```
+
+Use `-p /path/to/project` instead of `--all-projects` when you only want one project. The command reads local Gemini CLI session files and writes to the Mem server configured in `nmem`.
+
 ## Thread Save vs Handoff
 
 Gemini now supports two separate save paths, and they should stay distinct:
