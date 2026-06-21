@@ -1,5 +1,5 @@
 import { spawnSync } from 'node:child_process';
-import { readFileSync } from 'node:fs';
+import { readdirSync, readFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 
 // ---------------------------------------------------------------------------
@@ -33,7 +33,6 @@ function hostAgentFingerprint() {
   // 2) MAC address — first non-loopback interface
   try {
     const netDir = '/sys/class/net';
-    const { readdirSync } = require('node:fs');
     const ifaces = readdirSync(netDir).sort();
     for (const iface of ifaces) {
       try {
@@ -57,7 +56,7 @@ function hostAgentFingerprint() {
       // Extract the 64-char hex layer ID from the path
       const parts = upperdir.replace(/\/+$/, '').split('/');
       for (let i = parts.length - 1; i >= 0; i--) {
-        if (parts[i].length >= 32 && /^[0-9a-f]+$/.test(parts[i])) {
+        if (parts[i].length === 64 && /^[0-9a-f]+$/.test(parts[i])) {
           const digest = createHash('sha256').update(parts[i]).digest('hex');
           return `gemini-cli-${digest.substring(0, 8)}`;
         }
