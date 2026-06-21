@@ -9,35 +9,62 @@ import { createHash } from 'node:crypto';
 /**
  * Derive a stable per-machine agent identity from system sources.
  *
- * Ordered by preference:
- *   1. /etc/machine-id (systemd / standard Linux)
- *   2. /proc/1/mountinfo overlay upperdir (Docker / LazyCat containers)
+ * Ordered by preference (universal across bare metal, VMs, Docker, LPK):
+ *   1. /etc/machine-id    — systemd hosts (gold standard, unique per machine)
+ *   2. MAC address        — primary non-loopback interface (universal on Linux;
+ *                           Docker assigns per-host IP→MAC, unique in practice)
+ *   3. /proc/1/mountinfo  — overlay upperdir layer hash (last resort for
+ *                           containers; content-addressed, NOT machine-unique)
  *
  * Returns "gemini-cli-XXXXXXXX" (8 hex chars) or an empty string.
  *
  * @returns {string}
  */
 function hostAgentFingerprint() {
-  const sources = ['/etc/machine-id', '/proc/1/mountinfo'];
-  for (const source of sources) {
-    try {
-      let raw = readFileSync(source, 'utf8').trim();
-      if (!raw) continue;
-
-      // /proc/1/mountinfo: extract the overlay upperdir layer hash
-      if (source === '/proc/1/mountinfo') {
-        const line = raw.split('\n').find(l => l.includes('upperdir='));
-        if (!line) continue;
-        const upperdir = line.split('upperdir=')[1].split(',')[0].trim();
-        raw = upperdir.split('/').pop();
-      }
-
+  // 1) /etc/machine-id
+  try {
+    const raw = readFileSync('/etc/machine-id', 'utf8').trim();
+    if (raw) {
       const digest = createHash('sha256').update(raw).digest('hex');
       return `gemini-cli-${digest.substring(0, 8)}`;
-    } catch {
-      // Source unavailable, try next
     }
-  }
+  } catch { /* unavailable */ }
+
+  // 2) MAC address — first non-loopback interface
+  try {
+    const netDir = '/sys/class/net';
+    const { readdirSync } = require('node:fs');
+    const ifaces = readdirSync(netDir).sort();
+    for (const iface of ifaces) {
+      try {
+        const addr = readFileSync(`${netDir}/${iface}/address`, 'utf8').trim();
+        if (addr && addr !== '00:00:00:00:00:00') {
+          const digest = createHash('sha256').update(addr).digest('hex');
+          return `gemini-cli-${digest.substring(0, 8)}`;
+        }
+      } catch { /* skip this interface */ }
+    }
+  } catch { /* /sys/class/net not available */ }
+
+  // 3) /proc/1/mountinfo — overlay upperdir layer hash (last resort)
+  try {
+    const raw = readFileSync('/proc/1/mountinfo', 'utf8');
+    const line = raw.split('\n').find(
+      l => l.includes(' / ') && l.includes('overlay') && l.includes('upperdir=')
+    );
+    if (line) {
+      const upperdir = line.split('upperdir=')[1].split(',')[0].trim();
+      // Extract the 64-char hex layer ID from the path
+      const parts = upperdir.replace(/\/+$/, '').split('/');
+      for (let i = parts.length - 1; i >= 0; i--) {
+        if (parts[i].length >= 32 && /^[0-9a-f]+$/.test(parts[i])) {
+          const digest = createHash('sha256').update(parts[i]).digest('hex');
+          return `gemini-cli-${digest.substring(0, 8)}`;
+        }
+      }
+    }
+  } catch { /* unavailable */ }
+
   return '';
 }
 
