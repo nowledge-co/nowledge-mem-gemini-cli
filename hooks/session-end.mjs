@@ -58,7 +58,7 @@ function hostAgentFingerprint() {
       for (let i = parts.length - 1; i >= 0; i--) {
         if (parts[i].length === 64 && /^[0-9a-f]+$/.test(parts[i])) {
           const digest = createHash('sha256').update(parts[i]).digest('hex');
-          return `gemini-cli-${digest.substring(0, 8)}`;
+          return `overlay-${digest.substring(0, 8)}`;
         }
       }
     }
