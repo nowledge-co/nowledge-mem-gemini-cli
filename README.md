@@ -127,7 +127,7 @@ For thread save in remote mode, the important detail is that `nmem t save --from
 
 ## Direct `nmem` Use Is Always Allowed
 
-The bundled commands are convenience paths, not a cage. Gemini should freely compose direct `nmem` commands when that is clearer or more flexible.
+The bundled commands are convenience paths, not a cage. Gemini should freely compose direct `nmem` commands when that is clearer or more flexible. **We recommend reaching for `nmem` directly** for anything outside the per-turn tool set -- including graph and relationship queries (`nmem graph expand <memory-or-crystal-id> --depth 2`, `nmem graph evolves <memory-id>`). Run `nmem --help` to see its full capabilities.
 
 Examples:
 
