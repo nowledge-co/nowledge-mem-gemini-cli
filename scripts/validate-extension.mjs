@@ -72,6 +72,7 @@ async function main() {
     'commands/nowledge/status.toml',
     'hooks/hooks.json',
     'hooks/session-start.mjs',
+    'hooks/agent-bridge-startup.mjs',
     'hooks/session-end.mjs',
     'skills/read-working-memory/SKILL.md',
     'skills/search-memory/SKILL.md',

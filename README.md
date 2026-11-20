@@ -192,3 +192,7 @@ That keeps your custom behavior stable while letting the extension keep updating
 - [Nowledge Mem](https://mem.nowledge.co)
 - [Discord](https://nowled.ge/discord)
 - [GitHub](https://github.com/nowledge-co/nowledge-mem-gemini-cli)
+
+## Bridge mailbox
+
+Set `NMEM_BRIDGE_INBOX_ON_START=1` and an approved `NMEM_AGENT_CONTEXT` before launch. The `SessionStart` hook asks the agent to check one exact-Space inbox page through the configured Cloud `nmem bridge` connection.
