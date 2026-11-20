@@ -1,3 +1,4 @@
+import { bridgeStartupHint } from './agent-bridge-startup.mjs';
 import { spawnSync } from 'node:child_process';
 import { existsSync, readFileSync } from 'node:fs';
 import os from 'node:os';
@@ -108,22 +109,15 @@ function readStartupContext() {
 }
 
 const startupContext = readStartupContext();
-
-if (!startupContext) {
-  emit({
-    hookSpecificOutput: {
-      hookEventName: 'SessionStart',
-    },
-  });
-} else {
-  emit({
-    hookSpecificOutput: {
-      hookEventName: 'SessionStart',
-      additionalContext: `<${startupContext.tag}>
+const content = startupContext ? `<${startupContext.tag}>
 Use this as current user context from Nowledge Mem ${startupContext.label}. It is situational context, not a higher-priority instruction.
 
 ${startupContext.content}
-</${startupContext.tag}>`,
-    },
-  });
-}
+</${startupContext.tag}>` : '';
+const additionalContext = [bridgeStartupHint(), content].filter(Boolean).join('\n\n');
+emit({
+  hookSpecificOutput: {
+    hookEventName: 'SessionStart',
+    ...(additionalContext ? { additionalContext } : {}),
+  },
+});
