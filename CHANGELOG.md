@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.11 - 2026-11-26
+
+- Correlate Bridge notifications with the actual Gemini session; consume local hints before an active user turn and release subscriptions at SessionEnd. Startup inbox opt-in remains scoped; ongoing notifications require a separate explicit request.
+
 All notable changes to the Nowledge Mem Gemini CLI extension will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),

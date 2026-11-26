@@ -23,5 +23,8 @@ jobs:
       - name: Validate extension package
         run: npm run validate
 
+      - name: Verify local Bridge hook contract
+        run: node --test scripts/test-bridge-notice.mjs
+
       - name: Verify release packaging
         run: npm run package:release
