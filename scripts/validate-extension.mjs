@@ -48,11 +48,9 @@ async function main() {
   if (!server || typeof server !== 'object') {
     fail('manifest.mcpServers.nowledge-mem must be defined');
   }
-  if (server.httpUrl !== 'http://127.0.0.1:14242/mcp/') {
-    fail('manifest.mcpServers.nowledge-mem.httpUrl must stay on the local Mem MCP endpoint');
-  }
-  if (server.headers?.APP !== 'Gemini CLI') {
-    fail('manifest.mcpServers.nowledge-mem.headers.APP must be Gemini CLI');
+  if (server.command !== 'nmem' || JSON.stringify(server.args) !== '["mcp"]' ||
+      server.env?.NMEM_MCP_APP !== 'Gemini CLI' || 'httpUrl' in server || 'headers' in server) {
+    fail('manifest must launch nmem mcp with Gemini attribution, without a URL or credential');
   }
 
   if (manifest.settings !== undefined && !Array.isArray(manifest.settings)) {

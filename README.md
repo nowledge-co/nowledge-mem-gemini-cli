@@ -71,7 +71,7 @@ Release packaging and marketplace notes live in [`RELEASING.md`](./RELEASING.md)
 
 **Bundled MCP**
 
-- Local same-machine installs expose `nowledge-mem` MCP tools at `http://127.0.0.1:14242/mcp/`
+- The bundled server uses `nmem mcp` to connect to the workspace selected when Gemini starts.
 - Gemini `settings.json` can override the same `nowledge-mem` server name for remote Mem or a custom local endpoint
 
 **Persistent context**
@@ -97,7 +97,7 @@ Release packaging and marketplace notes live in [`RELEASING.md`](./RELEASING.md)
 
 ## Local vs Remote
 
-By default, both `nmem` and the bundled MCP server point to the local Mem server at `http://127.0.0.1:14242`.
+The bundled MCP server requires nmem 0.10.125 or later. Start a new Gemini session after switching workspaces.
 
 For remote Mem, the preferred long-term setup is:
 
@@ -115,13 +115,7 @@ nmem config client set api-key nmem_your_key
 
 If you need a temporary override for one Gemini session, launch Gemini from a shell where `NMEM_API_URL` and `NMEM_API_KEY` are already exported. For durable setup, keep using `~/.nowledge-mem/config.json`.
 
-For Gemini MCP tools in remote mode, define a `nowledge-mem` server in Gemini `settings.json`. Gemini gives user settings precedence over the extension's bundled local MCP server:
-
-```bash
-nmem config mcp show --host gemini-cli
-```
-
-Paste the generated JSON into Gemini's `settings.json`. Direct MCP clients do not read `~/.nowledge-mem/config.json` automatically; the generated block gives Gemini the same URL and key that `nmem` already uses.
+No Gemini settings change is needed when moving between local and Cloud. If you have a user-owned override in Gemini settings, it takes precedence over the bundled MCP server.
 
 For thread save in remote mode, the important detail is that `nmem t save --from gemini-cli` reads Gemini's local session files on the machine running Gemini, then uploads the normalized thread messages to Mem. The remote Mem server does not need direct access to your `~/.gemini` directory.
 
