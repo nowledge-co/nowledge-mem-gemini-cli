@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.11
+
+- New sessions use the workspace selected by nmem instead of a fixed localhost address. Requires nmem 0.10.126 or later.
+
 All notable changes to the Nowledge Mem Gemini CLI extension will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
