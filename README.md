@@ -97,7 +97,7 @@ Release packaging and marketplace notes live in [`RELEASING.md`](./RELEASING.md)
 
 ## Local vs Remote
 
-The bundled MCP server requires nmem 0.10.125 or later. Start a new Gemini session after switching workspaces.
+The bundled MCP server requires nmem 0.10.126 or later. Start a new Gemini session after switching workspaces.
 
 For remote Mem, the preferred long-term setup is:
 

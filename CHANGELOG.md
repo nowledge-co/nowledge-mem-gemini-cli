@@ -2,7 +2,7 @@
 
 ## 0.1.11
 
-- New sessions use the workspace selected by nmem instead of a fixed localhost address. Requires nmem 0.10.125 or later.
+- New sessions use the workspace selected by nmem instead of a fixed localhost address. Requires nmem 0.10.126 or later.
 
 All notable changes to the Nowledge Mem Gemini CLI extension will be documented in this file.
 
