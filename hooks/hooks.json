@@ -11,6 +11,17 @@
             "timeout": 10000
           }
         ]
+      },
+      {
+        "hooks": [
+          {
+            "name": "bridge-sessionstart",
+            "type": "command",
+            "command": "node \"${extensionPath}${/}hooks${/}bridge-notice.mjs\"",
+            "description": "Use actual session correlation for local Bridge notices.",
+            "timeout": 2000
+          }
+        ]
       }
     ],
     "SessionEnd": [
@@ -24,6 +35,17 @@
             "timeout": 20000
           }
         ]
+      },
+      {
+        "hooks": [
+          {
+            "name": "bridge-sessionend",
+            "type": "command",
+            "command": "node \"${extensionPath}${/}hooks${/}bridge-notice.mjs\"",
+            "description": "Use actual session correlation for local Bridge notices.",
+            "timeout": 2000
+          }
+        ]
       }
     ],
     "PreCompress": [
@@ -35,6 +57,19 @@
             "command": "node \"${extensionPath}${/}hooks${/}session-end.mjs\"",
             "description": "Best-effort Gemini session import before context compression.",
             "timeout": 20000
+          }
+        ]
+      }
+    ],
+    "BeforeAgent": [
+      {
+        "hooks": [
+          {
+            "name": "bridge-beforeagent",
+            "type": "command",
+            "command": "node \"${extensionPath}${/}hooks${/}bridge-notice.mjs\"",
+            "description": "Use actual session correlation for local Bridge notices.",
+            "timeout": 2000
           }
         ]
       }

@@ -196,3 +196,8 @@ That keeps your custom behavior stable while letting the extension keep updating
 ## Bridge mailbox
 
 Set `NMEM_BRIDGE_INBOX_ON_START=1` and an approved `NMEM_AGENT_CONTEXT` before launch. The `SessionStart` hook asks the agent to check one exact-Space inbox page through the configured Cloud `nmem bridge` connection.
+
+## Explicit Bridge mailbox notices
+
+With an explicitly subscribed actual host session, the active-turn hook consumes fresh local observer hints. It does not fetch or acknowledge mail, poll, wake an idle host, create an identity, or enable native-session/precise-reply routing. Startup inbox opt-in alone does not authorize this ongoing subscription. The adapter requires a CLI with `bridge notices check` and quietly retains the startup-only flow with older CLIs.
+Gemini `SessionEnd` releases the actual session subscription; compaction does not.
